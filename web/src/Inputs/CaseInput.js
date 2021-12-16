@@ -11,6 +11,7 @@ export const CaseInput = (props) => {
         shrink: true,
       }}
       onChange={props.onChange}
+      value={props.value}
     />
   );
 };

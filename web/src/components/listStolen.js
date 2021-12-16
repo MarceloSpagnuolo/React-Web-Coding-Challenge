@@ -13,6 +13,7 @@ export const ListStolen = (props) => {
           <div key={index}>
             <StolenCard
               index={index}
+              id={stolen.id}
               title={stolen.title}
               description={stolen.description}
               date={new Date(stolen.date_stolen * 1000)}

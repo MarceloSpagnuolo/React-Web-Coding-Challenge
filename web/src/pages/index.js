@@ -16,12 +16,12 @@ export const IndexPage = () => {
   const classes = useStyles();
 
   useEffect(() => {
-    dispatch(GetAllCases());
+    !!cases && cases.length === 0 && dispatch(GetAllCases());
   }, [dispatch]);
 
   useEffect(() => {
-    total === 0 && setTotal(cases.length);
-    pages === 0 && setPages(cases.length / 10);
+    setTotal(cases.length);
+    setPages(cases.length / 10);
     setItems(cases.slice(page * 10, page * 10 + 10));
   }, [cases, page]);
 
@@ -40,9 +40,9 @@ export const IndexPage = () => {
   return (
     <div>
       <Search />
-      {!!items && items.length > 0 && (
-        <ListStolen total={total} cases={items} />
-      )}
+
+      <ListStolen total={total} cases={items} />
+
       <div className={classes.Botones}>
         <FindCases
           label="Anterior"
@@ -65,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "auto",
     marginLeft: "auto",
     marginTop: 20,
+    marginBottom: 20,
     display: "flex",
     justifyContent: "end",
   },

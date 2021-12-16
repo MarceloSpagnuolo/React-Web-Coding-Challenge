@@ -1,6 +1,7 @@
 import React from "react";
 import bici from "../images/bici.png";
 import { makeStyles } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 export const StolenCard = (props) => {
   const classes = useStyles();
@@ -11,7 +12,9 @@ export const StolenCard = (props) => {
         <img src={props.thumb || bici} className={classes.Image} alt="" />
       </div>
       <div>
-        <h2>Stolen {props.title}</h2>
+        <Link to={`/detail?id=${props.id}`}>
+          <h2>Stolen {props.title}</h2>
+        </Link>
         <p>{props.description || "Without description"}</p>
         <p>
           {props.date.toLocaleDateString()} - {props.location}

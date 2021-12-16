@@ -8,12 +8,12 @@ export const DateInput = (props) => {
       id="date"
       label={props.label}
       type="date"
-      defaultValue={""}
       InputLabelProps={{
         shrink: true,
       }}
       variant="outlined"
       onChange={props.onChange}
+      value={props.value}
     />
   );
 };
