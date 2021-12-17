@@ -1,20 +1,21 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CaseInput } from "../Inputs/CaseInput";
 import { DateInput } from "../Inputs/DateInput";
 import { makeStyles } from "@material-ui/core";
 import { FindCases } from "../Inputs/FindCases";
-import { GetFindDesc, GetAllCases } from "../store/action";
+import { GetFindDesc, GetAllCases, GetDates } from "../store/action";
 
 export const Search = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const [cases, setCases] = useState("");
+  const [casos, setCasos] = useState("");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
+  const { cases } = useSelector((state) => state);
 
   function handleCases(e) {
-    setCases(e.target.value);
+    setCasos(e.target.value);
   }
   function handleFrom(e) {
     setFrom(e.target.value);
@@ -23,19 +24,15 @@ export const Search = () => {
     setTo(e.target.value);
   }
   function handleClick() {
-    if (cases.length > 0) {
-      dispatch(GetFindDesc(cases));
+    if (casos.length > 0) {
+      dispatch(GetFindDesc(casos));
     } else if (from !== "" && to !== "") {
-      console.log(from, to);
-      const query = `date_stolen>=${
-        new Date(from).getTime() / 1000
-      } && date_stolen<=${new Date(to).getTime() / 1000}`;
-      dispatch(GetFindDesc(query));
+      dispatch(GetDates(cases, from, to));
     }
   }
   function handleReset() {
     dispatch(GetAllCases());
-    setCases("");
+    setCasos("");
     setFrom("");
     setTo("");
   }
@@ -46,7 +43,7 @@ export const Search = () => {
         <CaseInput
           className={classes.Case}
           onChange={(e) => handleCases(e)}
-          value={cases}
+          value={casos}
         />
         <DateInput
           className={classes.From}

@@ -1,4 +1,9 @@
-import { ERROR_MESSAGE, GET_ALL_CASES, GET_FIND_DESC } from "./constants";
+import {
+  ERROR_MESSAGE,
+  GET_ALL_CASES,
+  GET_FIND_DESC,
+  GET_DATES,
+} from "./constants";
 
 const inicialState = {
   cases: [],
@@ -20,6 +25,11 @@ export const ReducerStolen = (state = inicialState, action) => {
       alert(action.message);
       return state;
     }
+    case GET_DATES:
+      return {
+        ...state,
+        cases: action.payload,
+      };
     default:
       return state;
   }
